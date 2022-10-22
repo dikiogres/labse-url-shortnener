@@ -1,1 +1,1 @@
-## spotify-clone-react
+## spotify-clone
