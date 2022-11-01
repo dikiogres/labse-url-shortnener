@@ -1,6 +1,10 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import type { NextPage } from "next";
+import { useEffect, useState } from "react";
+import classNames from "classnames";
+import { nanoid } from "nanoid";
+import debounce from "lodash/debounce"
+import { trpc } from "../../utils/trpc";
+import copy from "copy-to-clipboard"
 
 export default function Home() {
   return (
