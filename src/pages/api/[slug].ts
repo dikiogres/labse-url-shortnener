@@ -4,15 +4,23 @@ import { prisma } from "../../db/client";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 
-    const query  = req.query;
+    const slug  = req.query["slug"];
 
-    console.log(query);
+    if(!slug || typeof slug !== "string"){
+        res.statusCode = 404;
 
-    // const data = await prisma.shortLink.findFirst({
-    //     where: {
-    //         slug: {
-    //             equals: query.id
-    //         }
-    //     }
-    // })
+        res.send(JSON.stringify({ 
+            message: "Invalid slug"
+        }));
+
+        return;
+    }
+
+    const data = await prisma.shortLink.findFirst({
+        where: {
+            slug: {
+                equals: slug,
+            }
+        }
+    })
 };
