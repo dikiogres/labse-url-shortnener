@@ -1,16 +1,23 @@
-import { NextFetchEven, NextRequest, NextApiResponse, NextFetchEvent } from "next/server";
-import { nanoid } from "nanoid";
+import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
 
-export function middleware(req: NextRequest, ev: NextFetchEvent){
-    if(){
-        const random = nanoid();
+export async function middleware(req: NextRequest, ev: NextFetchEvent){
+    if(req.nextUrl.pathname.startsWith("api/get-url")){
 
-        const res = NextResponse.next();
+        console.log("returning early")
 
-        res.cookie("poll-token", random {
-            sameSite: "strict"
-        });
-
-        return res;
+        return;
     }
+
+    const slug = req.nextUrl.pathname.split("/").pop();
+
+    const data = await (
+       await fetch(`${req.nextUrl.origin}/api/get-url/${slug}`)
+    ).json();
+
+    if(data?.url){
+        return NextResponse.redirect(data.url);
+    }
+
+
 }
+
