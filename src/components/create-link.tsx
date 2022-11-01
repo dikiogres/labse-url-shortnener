@@ -24,7 +24,7 @@ const CreateLinkForm: NextPage = () => {
   const createSlug = trpc.useMutation(["createSlug"]);
 
   const input =
-    "text-black my-1 p-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-pink-500 focus:ring-pink-500 block w-full rounded-md sm:text-sm focus:ring-1";
+    "text-black my-1 p-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-cyan-500 block w-full rounded-md sm:text-sm focus:ring-1";
 
   const slugInput = classNames(input, {
     "border-red-500": slugCheck.isFetched && slugCheck.data!.used,
@@ -39,7 +39,7 @@ const CreateLinkForm: NextPage = () => {
           <input
             type="button"
             value="Copy Link"
-            className="rounded bg-pink-500 py-1.5 px-1 font-bold cursor-pointer ml-2"
+            className="rounded bg-cyan-500 py-1.5 px-1 font-bold cursor-pointer ml-2"
             onClick={() => {
               copy(`${url}/${form.slug}`);
             }}
@@ -48,7 +48,7 @@ const CreateLinkForm: NextPage = () => {
         <input
           type="button"
           value="Reset"
-          className="rounded bg-pink-500 py-1.5 px-1 font-bold cursor-pointer m-5"
+          className="rounded bg-cyan-500 py-1.5 px-1 font-bold cursor-pointer m-5"
           onClick={() => {
             createSlug.reset();
             setForm({ slug: "", url: "" });
@@ -83,7 +83,7 @@ const CreateLinkForm: NextPage = () => {
             debounce(slugCheck.refetch, 100);
           }}
           minLength={1}
-          placeholder="rothaniel"
+          placeholder="buatindong"
           className={slugInput}
           value={form.slug}
           pattern={"^[-a-zA-Z0-9]+$"}
@@ -93,7 +93,7 @@ const CreateLinkForm: NextPage = () => {
         <input
           type="button"
           value="Random"
-          className="rounded bg-pink-500 py-1.5 px-1 font-bold cursor-pointer ml-2"
+          className="rounded bg-cyan-500 py-1.5 px-1 font-bold cursor-pointer ml-2"
           onClick={() => {
             const slug = nanoid();
             setForm({
@@ -109,7 +109,7 @@ const CreateLinkForm: NextPage = () => {
         <input
           type="url"
           onChange={(e) => setForm({ ...form, url: e.target.value })}
-          placeholder="https://google.com"
+          placeholder="https://www.buatindong.website/"
           className={input}
           required
         />
@@ -117,7 +117,7 @@ const CreateLinkForm: NextPage = () => {
       <input
         type="submit"
         value="Create"
-        className="rounded bg-pink-500 p-1 font-bold cursor-pointer mt-1"
+        className="rounded bg-cyan-500 p-1 font-bold cursor-pointer mt-1"
         disabled={slugCheck.isFetched && slugCheck.data!.used}
       />
     </form>
