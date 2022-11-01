@@ -22,5 +22,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 equals: slug,
             }
         }
-    })
+    });
+
+    if(!data){
+        res.statusCode = 404;
+
+        res.send(JSON.stringify({ 
+            message: "Slug not found"
+        }));
+
+        return;
+    }
+
+    return res.redirect(data.url);
 };
