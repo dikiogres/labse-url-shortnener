@@ -7,6 +7,7 @@ import { trpc } from "../../utils/trpc";
 import copy from "copy-to-clipboard";
 
 type Form = {
+  [key: string]: any;
   slug: string;
   url: string;
 };
@@ -15,7 +16,7 @@ const CreateLinkForm: NextPage = () => {
   const [form, setForm] = useState<Form>({ slug: "", url: "" });
   const url = window.location.origin;
 
-  const slugCheck = trpc.useQuery(["slugCheck", { slug: form.slug }], {
+  const slugCheck:any = trpc.useQuery(["slugCheck", { slug: form.slug }], {
     refetchOnReconnect: false, // replacement for enable: false which isn't respected.
     refetchOnMount: false,
     refetchOnWindowFocus: false,
@@ -82,7 +83,7 @@ const CreateLinkForm: NextPage = () => {
             debounce(slugCheck.refetch, 100);
           }}
           minLength={1}
-          placeholder="buatindong"
+          placeholder="rothaniel"
           className={slugInput}
           value={form.slug}
           pattern={"^[-a-zA-Z0-9]+$"}
@@ -92,7 +93,7 @@ const CreateLinkForm: NextPage = () => {
         <input
           type="button"
           value="Random"
-          className="rounded bg-cyan-500 py-1.5 px-1 font-bold cursor-pointer ml-2"
+          className="rounded bg-pink-500 py-1.5 px-1 font-bold cursor-pointer ml-2"
           onClick={() => {
             const slug = nanoid();
             setForm({
@@ -108,7 +109,7 @@ const CreateLinkForm: NextPage = () => {
         <input
           type="url"
           onChange={(e) => setForm({ ...form, url: e.target.value })}
-          placeholder="https://www.buatindong.website/"
+          placeholder="https://google.com"
           className={input}
           required
         />
@@ -116,7 +117,7 @@ const CreateLinkForm: NextPage = () => {
       <input
         type="submit"
         value="Create"
-        className="rounded bg-cyan-500 p-1 font-bold cursor-pointer mt-1"
+        className="rounded bg-pink-500 p-1 font-bold cursor-pointer mt-1"
         disabled={slugCheck.isFetched && slugCheck.data!.used}
       />
     </form>
