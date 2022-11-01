@@ -34,6 +34,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) =>  {
           "s-maxage=1000000000, stale-while-revalidate"
         );
 
+
         res.send(JSON.stringify({ 
             message: "Slug not found"
         }));
